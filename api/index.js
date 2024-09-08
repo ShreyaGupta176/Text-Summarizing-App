@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const summarizeText = require('./summarize.js');
+const summarizeText = require('../summarize.js');
 
 // Parses JSON bodies (as sent by API clients)
 app.use(express.json());
 
 // Serves static files from the 'public' directory
-app.use(express.static('public'));
+app.use(express.static('../public'));
 
 //adding endpoint for summarise
-app.post('/summarize', (req, res) => {
+app.post('/api/summarize', (req, res) => {
 
    // TODO: handle POST /summarize request
    // get the text_to_summarize property from the request body
@@ -27,7 +27,7 @@ app.post('/summarize', (req, res) => {
 
 });
 
-app.post('/generateImg', async (req, res) => {
+app.post('/api/generateImg', async (req, res) => {
   try {
     const imageBuffer = await generateImg();
     res.send(imageBuffer);
@@ -35,7 +35,7 @@ app.post('/generateImg', async (req, res) => {
     res.status(500).send('Error generating image');
   }
 });
-app.post('/image', (req, res) => {
+app.post('/api/image', (req, res) => {
 
    // TODO: handle POST /summarize request
    // get the text_to_summarize property from the request body
